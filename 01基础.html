@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>
+        vue基础
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <img v-bind:src="vue_icon" style="height: 100px;width: 100px;" />
+        <div>
+            v-model 双向数据绑定。它会根据控件类型自动选取正确的方法来更新元素
+        </div>
+        <div>
+            <input v-model="msg">
+        </div>
+        <div>
+            {{msg}}
+        </div>
+        v-once 一次有效 如果vue.msg 再次改变该属性的值 该文本也不会有变化
+        <div v-once>{{msg}}</div>
+
+        <div>
+            {{vinfo.verson}}
+        </div>
+        <div>
+            {{vinfo.size | suffix("KB")}}
+        </div>
+
+        <div>
+            <input v-model="checked" v-on:change="checked=checked==1">
+        </div>
+        为啥 v-model 控制不了checked  
+        <div>
+            <input type="checkbox" v-model="checked" >
+        </div>
+        <div>
+            <label>{{checked}}</label>
+        </div>
+
+        <hr>
+        <dv>显示html样式文档</dv>
+        <div v-html="html"> </div>
+        <hr>
+        <button v-on:click="isShow=!isShow">表达式 显示/隐藏</button>
+        <button v-on:click="changeshow">函数控制 显示/隐藏</button> 
+        <div v-if="isShow">
+            用 v-if指令控制
+        </div>   
+        <br>
+        <div>
+            用v-bind: 控制绑定的特性
+        </div>
+        <div v-bind:display="isShow">用v-bind:disabled 来控制</div>
+        <div v-bind:style="isShow?'{height:200px;color:red;}':''">用v-bind:disabled 来控制</div>
+    </div>
+
+    <div style="height: 500px;"></div>
+</body>
+<script>
+    var vue = new Vue({
+        el: "#app", //querySelector
+        //数据集
+        data: {
+            msg: "hellow vue.js",
+            vinfo: {
+                verson: "2.0.5",
+                size: 100
+            },
+            checked: false,
+            isShow: false,
+            vue_icon: "https://cn.vuejs.org/images/logo.png",
+            html:"<span>html documnet</span>",
+
+        },
+        //过滤器
+        filters: {
+            //加个后缀
+            suffix: function (value, sfix) {
+                return value + sfix;
+            }
+        },
+        //方法
+        methods: {
+            changeshow: function () {
+                //改变值得实惠vm视图模型就会重新刷新页面 重新判断值
+                vue.isShow = !vue.isShow;
+
+            },
+            changecheck:function(value){
+                vue.checked=value==1;
+            }
+        }
+    });
+
+</script>
+
+</html>

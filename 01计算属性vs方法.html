@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang=‘en’>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>vue</title>
+    <script src='https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js'></script>
+</head>
+
+<body>
+    <div id='app'>
+        <div>{{msg}}</div>
+        <div>计算属性得到的长度msg.length ：{{operationmsg}}</div>
+        <div>通过函数得到的长度msg.length ：{{computedmsg()}}</div>
+    </div>
+</body>
+<script>
+    var vue = new Vue({
+        el: '#app',
+        data: {
+            msg: "计算属性和方法，计算属性是依赖缓存数据的，也就是当依拉的属性没有变化的时候，计算属性会直接从缓存中读取之前计算的属性值，而方法只要调用一次就会执行一次，相比浪费资源"
+        },
+        computed: {
+            operationmsg: function () {
+                return this.msg.length;
+            }
+        }, methods: {
+            computedmsg: function () {
+                return this.msg.length;
+            }
+        },
+    })
+</script>
+
+</html>
